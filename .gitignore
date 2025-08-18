@@ -13,3 +13,5 @@ docker-compose.override.yml
 .DS_Store
 *.swp
 
+# Custom trash bin
+trashbin.txt
