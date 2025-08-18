@@ -30,10 +30,8 @@ const MessageSchema = new Schema(
       required: true,
     },
 
-    // Message body
     content: { type: String, trim: true },
 
-    // Attachments
     attachments: [
       {
         url: { type: String, required: true },
@@ -45,45 +43,31 @@ const MessageSchema = new Schema(
       },
     ],
 
-    // Threading: parent message (for replies)
+
     parentMessage: { type: Types.ObjectId, ref: "Message", default: null },
-
-    // Reactions (emoji-based)
     reactions: [ReactionSchema],
-
-    // Message type
     type: {
       type: String,
       enum: ["text", "system"],
       default: "text",
     },
-
-    // Delivery status
     deliveryStatus: {
       type: String,
       enum: ["pending", "delivered", "failed"],
       default: "pending",
     },
-
-    // Read receipts
     readBy: [ReadReceiptSchema],
-
-    // Edit / delete tracking
     editedAt: { type: Date },
     isDeleted: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
-
-// Pre-save: if content is updated, track edit time
 MessageSchema.pre("save", function (next) {
   if (this.isModified("content") && !this.isNew) {
     this.editedAt = new Date();
   }
   next();
 });
-
-// 🔹 Instance methods
 MessageSchema.methods.markDelivered = function () {
   this.deliveryStatus = "delivered";
   return this.save();
