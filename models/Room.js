@@ -23,15 +23,14 @@ const RoomSchema = new Schema(
     // Array of members with their room-specific roles
     members: [MemberSchema],
 
-    // Room settings
+ 
     type: {
       type: String,
-      enum: ["group", "dm", "channel"], // flexibility
+      enum: ["group", "dm", "channel"], 
       default: "group"
     },
     isPrivate: { type: Boolean, default: false },
 
-    // Optional: keep track of last activity for sorting
     lastMessageAt: { type: Date },
   },
   { timestamps: true }
