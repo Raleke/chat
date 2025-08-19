@@ -11,7 +11,7 @@ const sendMessage = async ({ roomId, senderId, content, fileId, parentMessage })
   });
   await message.save();
 
-  logger.info(`✉️ Message sent by ${senderId} in room ${roomId}`);
+  logger.info(` Message sent by ${senderId} in room ${roomId}`);
   return message;
 };
 
@@ -22,7 +22,7 @@ const markDelivered = async (messageId) => {
   message.deliveryStatus = "delivered";
   await message.save();
 
-  logger.info(`📬 Message ${messageId} marked delivered`);
+  logger.info(` Message ${messageId} marked delivered`);
   return message;
 };
 
@@ -37,7 +37,7 @@ const markRead = async (messageId, userId) => {
   if (!alreadyRead) {
     message.readBy.push({ user: userId, readAt: new Date() });
     await message.save();
-    logger.info(`👁️ Message ${messageId} read by ${userId}`);
+    logger.info(` Message ${messageId} read by ${userId}`);
   }
 
   return message;
@@ -54,7 +54,7 @@ const addReaction = async (messageId, userId, emoji) => {
   if (!existing) {
     message.reactions.push({ user: userId, emoji });
     await message.save();
-    logger.info(`😀 Reaction ${emoji} added by ${userId} on ${messageId}`);
+    logger.info(` Reaction ${emoji} added by ${userId} on ${messageId}`);
   }
 
   return message;
@@ -69,7 +69,7 @@ const removeReaction = async (messageId, userId, emoji) => {
   );
   await message.save();
 
-  logger.info(`❌ Reaction ${emoji} removed by ${userId} on ${messageId}`);
+  logger.info(` Reaction ${emoji} removed by ${userId} on ${messageId}`);
   return message;
 };
 
