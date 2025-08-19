@@ -130,4 +130,4 @@ const verifyEmail = async (token) => {
   return { user, token: generateToken(user) };
 };
 
-export { register, login, requestPasswordReset, resetPassword, verifyEmail };
+module.exports = { register, login, requestPasswordReset, resetPassword, verifyEmail };
