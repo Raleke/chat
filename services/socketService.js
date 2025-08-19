@@ -30,4 +30,4 @@ const emitBroadcast = (event, data) => {
   logger.debug(` Event [${event}] broadcasted to ALL`);
 };
 
-export { emitToUser, emitToRoom, emitBroadcast };
+module.exports = { emitToUser, emitToRoom, emitBroadcast };
