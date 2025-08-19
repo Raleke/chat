@@ -8,9 +8,9 @@ import { logger } from "../utils/logger.js";
 const sendInAppNotification = async (userId, payload) => {
   try {
     emitToUser(userId, "notification", payload);
-    logger.info(`🔔 In-app notification sent to user ${userId}`, payload);
+    logger.info(` In-app notification sent to user ${userId}`, payload);
   } catch (err) {
-    logger.error("❌ Failed to send in-app notification", { message: err.message });
+    logger.error(" Failed to send in-app notification", { message: err.message });
   }
 };
 
@@ -20,9 +20,9 @@ const sendInAppNotification = async (userId, payload) => {
 const sendEmailNotification = async (userEmail, subject, html) => {
   try {
     await sendEmail({ to: userEmail, subject, html });
-    logger.info(`📧 Email notification sent to ${userEmail}`);
+    logger.info(` Email notification sent to ${userEmail}`);
   } catch (err) {
-    logger.error("❌ Failed to send email notification", { message: err.message });
+    logger.error(" Failed to send email notification", { message: err.message });
   }
 };
 
