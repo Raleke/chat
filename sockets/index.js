@@ -5,9 +5,6 @@ const { logger } = require("../utils/logger.js");
 let io;
 const onlineUsers = new Map(); // userId -> socketId(s)
 
-/**
- * Initialize socket.io and bind events
- */
 const initSockets = (server) => {
   io = new Server(server, {
     cors: {
@@ -25,7 +22,7 @@ const initSockets = (server) => {
       socket.user = { id: decoded.id, role: decoded.role };
       return next();
     } catch (err) {
-      logger.error("❌ Socket authentication failed", { message: err.message });
+      logger.error(" Socket authentication failed", { message: err.message });
       return next(new Error("Authentication failed"));
     }
   });
@@ -47,12 +44,12 @@ const initSockets = (server) => {
     // Handle leaving rooms
     socket.on("leaveRoom", (roomId) => {
       socket.leave(roomId);
-      logger.info(`👋 User ${userId} left room ${roomId}`);
+      logger.info(` User ${userId} left room ${roomId}`);
     });
 
     // Cleanup on disconnect
     socket.on("disconnect", () => {
-      logger.info(`❌ User disconnected: ${userId} (${socket.id})`);
+      logger.info(` User disconnected: ${userId} (${socket.id})`);
       if (onlineUsers.has(userId)) {
         onlineUsers.get(userId).delete(socket.id);
         if (onlineUsers.get(userId).size === 0) {
@@ -65,9 +62,6 @@ const initSockets = (server) => {
   return io;
 };
 
-/**
- * Emit event to a single user (all their sockets)
- */
 const emitToUser = (userId, event, payload) => {
   if (!io) return;
   const sockets = onlineUsers.get(userId);
@@ -77,9 +71,6 @@ const emitToUser = (userId, event, payload) => {
   }
 };
 
-/**
- * Emit event to a whole room
- */
 const emitToRoom = (roomId, event, payload) => {
   if (!io) return;
   io.to(roomId).emit(event, payload);
