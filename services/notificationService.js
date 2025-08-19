@@ -38,4 +38,4 @@ const notifyUser = async ({ userId, userEmail, subject, html, payload }) => {
   }
 };
 
-export { sendInAppNotification, sendEmailNotification, notifyUser };
+module.exports={ sendInAppNotification, sendEmailNotification, notifyUser };
