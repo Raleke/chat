@@ -8,9 +8,9 @@ const emitToUser = (userId, event, data) => {
   const socketId = io.userSockets.get(userId.toString());
   if (socketId) {
     io.to(socketId).emit(event, data);
-    logger.debug(`📡 Event [${event}] sent to user ${userId}`);
+    logger.debug(`Event [${event}] sent to user ${userId}`);
   } else {
-    logger.warn(`⚠️ No active socket for user ${userId}`);
+    logger.warn(` No active socket for user ${userId}`);
   }
 };
 
@@ -19,7 +19,7 @@ const emitToUser = (userId, event, data) => {
  */
 const emitToRoom = (roomId, event, data) => {
   io.to(roomId.toString()).emit(event, data);
-  logger.debug(`💬 Event [${event}] broadcast to room ${roomId}`);
+  logger.debug(` Event [${event}] broadcast to room ${roomId}`);
 };
 
 /**
@@ -27,7 +27,7 @@ const emitToRoom = (roomId, event, data) => {
  */
 const emitBroadcast = (event, data) => {
   io.emit(event, data);
-  logger.debug(`🌍 Event [${event}] broadcasted to ALL`);
+  logger.debug(` Event [${event}] broadcasted to ALL`);
 };
 
 export { emitToUser, emitToRoom, emitBroadcast };
