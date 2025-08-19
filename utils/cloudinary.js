@@ -1,7 +1,7 @@
 import { v2 as cloudinary } from "cloudinary";
 import { logger } from "./logger.js";
 
-// ✅ Configure once (using env vars, not hardcoded secrets)
+//  Configure once (using env vars, not hardcoded secrets)
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -16,10 +16,10 @@ cloudinary.config({
 const uploadFile = async (filePath, options = {}) => {
   try {
     const result = await cloudinary.uploader.upload(filePath, options);
-    logger.info("✅ File uploaded to Cloudinary", { publicId: result.public_id, url: result.secure_url });
+    logger.info(" File uploaded to Cloudinary", { publicId: result.public_id, url: result.secure_url });
     return result;
   } catch (err) {
-    logger.error("❌ Cloudinary upload failed", { message: err.message, stack: err.stack });
+    logger.error(" Cloudinary upload failed", { message: err.message, stack: err.stack });
     throw err;
   }
 };
@@ -30,10 +30,10 @@ const uploadFile = async (filePath, options = {}) => {
 const deleteFile = async (publicId) => {
   try {
     const result = await cloudinary.uploader.destroy(publicId);
-    logger.info(`🗑️ File deleted from Cloudinary: ${publicId}`, result);
+    logger.info(` File deleted from Cloudinary: ${publicId}`, result);
     return result;
   } catch (err) {
-    logger.error("❌ Cloudinary delete failed", { message: err.message, stack: err.stack });
+    logger.error(" Cloudinary delete failed", { message: err.message, stack: err.stack });
     throw err;
   }
 };
@@ -46,7 +46,7 @@ const generateOptimizedUrl = (publicId) => {
     fetch_format: "auto",
     quality: "auto"
   });
-  logger.debug(`🔗 Generated optimized URL: ${url}`);
+  logger.debug(` Generated optimized URL: ${url}`);
   return url;
 };
 
@@ -60,7 +60,7 @@ const generateCroppedUrl = (publicId, width = 500, height = 500) => {
     width,
     height
   });
-  logger.debug(`✂️ Generated cropped URL: ${url}`);
+  logger.debug(` Generated cropped URL: ${url}`);
   return url;
 };
 
