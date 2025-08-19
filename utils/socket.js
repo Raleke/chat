@@ -12,7 +12,7 @@ const initSocket = (server) => {
   });
 
   io.on("connection", (socket) => {
-    logger.info(`⚡ User connected: ${socket.id}`);
+    logger.info(` User connected: ${socket.id}`);
 
     socket.on("joinRoom", (roomId) => {
       socket.join(roomId);
@@ -25,7 +25,7 @@ const initSocket = (server) => {
     });
 
     socket.on("disconnect", () => {
-      logger.info(`❌ User disconnected: ${socket.id}`);
+      logger.info(` User disconnected: ${socket.id}`);
     });
   });
 
