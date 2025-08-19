@@ -4,7 +4,7 @@ import { logger } from "../utils/logger.js";
 const createRoom = async ({ name, createdBy, isPrivate }) => {
   const room = new Room({ name, createdBy, members: [createdBy], isPrivate });
   await room.save();
-  logger.info(`💬 Room created: ${room.name}`);
+  logger.info(` Room created: ${room.name}`);
   return room;
 };
 
@@ -15,7 +15,7 @@ const joinRoom = async (roomId, userId) => {
   if (!room.members.includes(userId)) {
     room.members.push(userId);
     await room.save();
-    logger.info(`👥 User ${userId} joined room ${roomId}`);
+    logger.info(` User ${userId} joined room ${roomId}`);
   }
 
   return room;
@@ -29,10 +29,10 @@ const assignRole = async (roomId, userId, role) => {
   if (member) {
     member.role = role;
     await room.save();
-    logger.info(`⚡ User ${userId} role updated to ${role} in room ${roomId}`);
+    logger.info(` User ${userId} role updated to ${role} in room ${roomId}`);
   }
 
   return room;
 };
 
-export { createRoom, joinRoom, assignRole };
+module.exports = { createRoom, joinRoom, assignRole };
