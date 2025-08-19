@@ -12,17 +12,17 @@ const transporter = nodemailer.createTransport({
 const sendEmail = async ({ to, subject, html }) => {
   try {
     const mailOptions = {
-      from: `"Chat App" <${process.env.GMAIL_USER}>`, // ✅ updated sender name
+      from: `"Chat App" <${process.env.GMAIL_USER}>`, 
       to,
       subject,
       html
     };
 
     const info = await transporter.sendMail(mailOptions);
-    logger.info(`📧 Email sent to ${to}`, { messageId: info.messageId });
+    logger.info(` Email sent to ${to}`, { messageId: info.messageId });
     return info;
   } catch (err) {
-    logger.error("❌ Email sending failed", { message: err.message });
+    logger.error(" Email sending failed", { message: err.message });
     throw err;
   }
 };
