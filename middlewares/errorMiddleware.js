@@ -1,7 +1,7 @@
 const { logger } = require("../utils/logger.js");
 
 const errorMiddleware = (err, req, res, next) => {
-  logger.error("❌ API Error", { message: err.message, stack: err.stack });
+  logger.error(" API Error", { message: err.message, stack: err.stack });
 
   const status = err.status || 500;
   const response = {
