@@ -1,11 +1,11 @@
 const { upload } = require("../utils/multerConfig.js");
 
 const uploadMiddleware = (fieldName = "file") => {
-  return upload.single(fieldName); // handle single file uploads
+  return upload.single(fieldName); 
 };
 
 const multiUploadMiddleware = (fieldName = "files", maxCount = 5) => {
-  return upload.array(fieldName, maxCount); // handle multiple file uploads
+  return upload.array(fieldName, maxCount); 
 };
 
 module.exports = { uploadMiddleware, multiUploadMiddleware };
