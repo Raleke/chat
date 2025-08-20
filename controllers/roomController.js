@@ -1,8 +1,6 @@
-// controllers/roomController.js
 const roomService = require("../services/roomService.js");
 
 const roomController = {
-  // ✅ Create a new room (creator = owner)
   createRoom: async (req, res, next) => {
     try {
       const room = await roomService.createRoom({
@@ -15,7 +13,6 @@ const roomController = {
     }
   },
 
-  // ✅ Join a room
   joinRoom: async (req, res, next) => {
     try {
       const room = await roomService.joinRoom(req.params.roomId, req.user.id);
@@ -25,7 +22,6 @@ const roomController = {
     }
   },
 
-  // ✅ Leave a room
   leaveRoom: async (req, res, next) => {
     try {
       const room = await roomService.leaveRoom(req.params.roomId, req.user.id);
@@ -35,7 +31,6 @@ const roomController = {
     }
   },
 
-  // ✅ Get room details
   getRoomDetails: async (req, res, next) => {
     try {
       const room = await roomService.getRoomDetails(req.params.roomId);
@@ -46,7 +41,6 @@ const roomController = {
     }
   },
 
-  // ✅ Assign a role (promote/demote a member)
   assignRole: async (req, res, next) => {
     try {
       const { userId, role } = req.body;
