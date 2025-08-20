@@ -4,7 +4,6 @@ const { authMiddleware } = require("../middlewares/authMiddleware.js");
 
 const router = express.Router();
 
-// 💬 Message routes (protected)
 router.post("/", authMiddleware, messageController.sendMessage);
 router.post("/:messageId/read", authMiddleware, messageController.markAsRead);
 router.post("/:messageId/react", authMiddleware, messageController.addReaction);
