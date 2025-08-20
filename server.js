@@ -4,24 +4,17 @@ const connectDB = require("./config/db");
 const { initSocket } = require("./utils/socket");
 const logger = require("./utils/logger");
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 8000;
 
 const startServer = async () => {
   try {
-    // Connect to MongoDB
     await connectDB();
     logger.info("Connected to MongoDB successfully");
-
-    // Start the server
     const server = app.listen(PORT, () => {
       logger.info(`Server running on port ${PORT}`);
-      console.log(`🚀 Server running at http://localhost:${PORT}`);
+      console.log(` Server running at http://localhost:${PORT}`);
     });
-
-    // Initialize Socket.IO
     initSocket(server);
-
-    // Graceful shutdown
     process.on("SIGTERM", () => {
       logger.info("SIGTERM received, shutting down gracefully");
       server.close(() => {
@@ -44,7 +37,7 @@ const startServer = async () => {
 
   } catch (err) {
     logger.error("Failed to start server:", err);
-    console.error("❌ Failed to start server:", err.message);
+    console.error(" Failed to start server:", err.message);
     process.exit(1);
   }
 };
