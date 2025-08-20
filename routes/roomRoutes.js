@@ -5,13 +5,11 @@ const { roleMiddleware } = require("../middlewares/roleMiddleware.js");
 
 const router = express.Router();
 
-// 🏠 Room routes (protected)
 router.post("/", authMiddleware, roomController.createRoom);
 router.post("/:roomId/join", authMiddleware, roomController.joinRoom);
 router.post("/:roomId/leave", authMiddleware, roomController.leaveRoom);
 router.get("/:roomId", authMiddleware, roomController.getRoomDetails);
 
-// 🔒 Example: admin-only route
 router.delete(
   "/:roomId",
   authMiddleware,
