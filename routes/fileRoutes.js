@@ -5,7 +5,6 @@ const { uploadMiddleware } = require("../middlewares/uploadMiddleware.js");
 
 const router = express.Router();
 
-// 📂 File routes (protected)
 router.post(
   "/upload",
   authMiddleware,
