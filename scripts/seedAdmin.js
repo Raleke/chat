@@ -1,21 +1,19 @@
-// seedAdmin.js
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
 import { User } from "./models/User.js";
 
 dotenv.config();
-
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/chatapp";
 
 async function seedAdmin() {
   try {
     await mongoose.connect(MONGO_URI);
-    console.log("✅ MongoDB connected");
+    console.log(" MongoDB connected");
 
     const existing = await User.findOne({ email: process.env.ADMIN_EMAIL });
     if (existing) {
-      console.log("⚠️ Admin already exists");
+      console.log(" Admin already exists");
       process.exit(0);
     }
 
@@ -28,10 +26,10 @@ async function seedAdmin() {
     });
 
     await admin.save();
-    console.log("✅ Admin user created:", admin.email);
+    console.log(" Admin user created:", admin.email);
     process.exit(0);
   } catch (err) {
-    console.error("❌ Error seeding admin:", err.message);
+    console.error(" Error seeding admin:", err.message);
     process.exit(1);
   }
 }
